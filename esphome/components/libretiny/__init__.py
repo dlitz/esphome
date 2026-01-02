@@ -324,6 +324,9 @@ async def component_to_code(config):
     # set default UART port
     if (uart_port := framework.get(CONF_UART_PORT, None)) is not None:
         lt_options["LT_UART_DEFAULT_PORT"] = uart_port
+    # increase buffer space for mDNS TXT records (256 bytes -> 384 bytes) so
+    # that there's enough room for dashboard import (fixes issue #11281)
+    lt_options["MDNS_TXT_RDATA_SIZE"] = 384
     # add custom options
     lt_options.update(framework[CONF_OPTIONS])
 
