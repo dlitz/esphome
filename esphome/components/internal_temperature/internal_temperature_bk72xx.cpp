@@ -18,7 +18,7 @@ void InternalTemperatureSensor::update() {
   uint32_t raw, result;
   result = temp_single_get_current_temperature(&raw);
   success = (result == 0);
-#if defined(USE_LIBRETINY_VARIANT_BK7231N)
+#if defined(USE_LIBRETINY_VARIANT_BK7231N) || defined(USE_LIBRETINY_VARIANT_BK7238)
   temperature = raw * -0.38f + 156.0f;
 #else   // USE_LIBRETINY_VARIANT
   temperature = raw * 0.128f;
